@@ -17,7 +17,7 @@ func PostBalasan(w http.ResponseWriter, r *http.Request) {
 	var msg model.IteungMessage
 	var resp atmessage.Response
 	json.NewDecoder(r.Body).Decode(&msg)
-	link := "https://medium.com/@raulmahya11/whatsauth-free-2fa-otp-notif-whatsapp-gateway-api-gratis-faaf8b7586e3" + " dan " + "https://youtu.be/9bXr-fGZV9w"
+	link := "https://medium.com/@adrianbimo43/whatsauth-free-2fa-otp-notif-whatsapp-gateway-api-gratis-9df4d66360d5" + " dan " + "#"
 	if r.Header.Get("Secret") == os.Getenv("SECRET") {
 		if msg.Message == "loc" || msg.Message == "Loc" || msg.Message == "lokasi" || msg.LiveLoc {
 			location, err := ReverseGeocode(msg.Latitude, msg.Longitude)
@@ -39,7 +39,7 @@ func PostBalasan(w http.ResponseWriter, r *http.Request) {
 			dt := &wa.TextMessage{
 				To:       msg.Phone_number,
 				IsGroup:  false,
-				Messages: "Hai Hai Haiii kamuuuui " + msg.Alias_name + "\nraulganteng lagi gaadaa \n aku RAULLLL salam kenall yaaaa \n Cara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
+				Messages: "Hai Hai Haiii kamuuuui " + msg.Alias_name + "\nAdrian lagi gaadaa \n aku Adrian salam kenall yaaaa \n Cara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
 			}
 			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
 		}
