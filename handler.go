@@ -18,6 +18,7 @@ func Post(w http.ResponseWriter, r *http.Request) {
 	var msg model.IteungMessage
 	var resp atmessage.Response
 	json.NewDecoder(r.Body).Decode(&msg)
+	link := "https://medium.com" + " dan " + "https://youtube.com"
 	if r.Header.Get("Secret") == os.Getenv("SECRET") {
 		if ws.IsLoginRequest(msg, WAKeyword) { //untuk whatsauth request login
 			dt := &ws.WhatsauthRequest{
@@ -30,7 +31,7 @@ func Post(w http.ResponseWriter, r *http.Request) {
 			dt := &wa.TextMessage{
 				To:       msg.Phone_number,
 				IsGroup:  false,
-				Messages: "Halo " + msg.Alias_name + ", Kamu pecinta sukabapak ya?",
+				Messages: "Hai hai hai kak " + msg.Alias_name + "\nmaulana nya lagi gaadaa \n aku maulana salam kenall yaaaa \n Cara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
 			}
 			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
 		}
